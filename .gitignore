@@ -38,7 +38,5 @@ Thumbs.db
 
 # Project specific exclusions #
 ############
-media/
 prod.py
-wsgi.py
-wsgi-*
+wsgi-prod.py
