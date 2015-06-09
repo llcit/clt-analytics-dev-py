@@ -18,7 +18,7 @@
             Use your <strong>Guest</strong> Username and Password.<br>
             <small>(guest accounts are issued by request)</small>
         </legend>
-        <form method="post" action="/guest/login/">{% csrf_token %}
+        <form method="post" action="{% url 'local-login' %}">{% csrf_token %}
             <p><label>Username</label> <input type="text" name="username"></p>
             <p><label>Password</label> <input type="password" name="passwd"></p>
             <p><button type="submit" class="btn btn-block btn-default">Login</button></p>
