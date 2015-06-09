@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Apps
-    url(r'^review/', include('review.urls'), name='review'),
+    url(r'^review/', include('review.urls')),
     url(r'^analytics/', 'analytics.views.index', name='index'),
     url(r'^$', 'analytics.views.index'),
 

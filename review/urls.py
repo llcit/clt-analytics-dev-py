@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('review.views',
-    url(r'^$', 'securehome'),
+    url(r'^$', 'securehome', name='review'),
     url(r'^resp/$', 'respond'),
     url(r'^respclear/$', 'clearResponse'),
     url(r'^comm/$', 'writeComment'),
