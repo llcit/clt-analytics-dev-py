@@ -1,0 +1,136 @@
+{% extends "review-wrap.html" %}
+
+{% block reviewname %} for <a href="{{SITE_ROOT}}/review/info/{{review.id}}">{{review}}</a>{% endblock %}
+{% block help_pdf %}<a href="http://clt.manoa.hawaii.edu/lib/docs/QualityGuidelines-Rubric-HELP-20140214.pdf" target="_blank"><img src="{{STATIC_URL}}img/pdficon_small.png"  alt="help.pdf" height="16" width="16"> help? </a> {% endblock %}
+
+{% block appmenu %}
+<div class="row">
+	<div class="col-md-4">
+		<span id="questioncounter">{{responses|length}}</span>/<span>{{review.questions|length}}</span> questions answered<br>
+	</div>
+
+<div class="col-md-8 text-right">
+    
+	<span id="qstatus" style="{% if responses|length = review.questions|length and not submitted %}display: block {% else %}display: none{% endif %}"><a href="{{SITE_ROOT}}/review/report/{{review.id}}"> Click here to show your review in final report? </a></span>
+	<span id="qstatus" style="{% if submitted %}display: block {% else %}display: none{% endif %}"><a href="{{SITE_ROOT}}/review/report/unsubmit/{{review.id}}">Your review is currently visible in the report. Click here to edit responses. </a></span>
+	<span>&nbsp;</span>
+ 
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<form method="post">{% csrf_token %}	
+	<input name="revid" id="review-id" type="hidden" value="{{review.id}}"/>
+
+<div id="tabified" class="col-md-12 thumbnail">
+	{% comment %} Generate tabs based on sections of questionairre {% endcomment %}
+	<ul class="nav nav-tabs nav-justified">
+	{%for s in sections%}
+		<li class='{% if forloop.first %} active {% endif %}'>						
+			<a  style="color: black; height: 100px" href="#tabs-{{s.rank}}" data-toggle="tab">
+			<span style="position: absolute; top: 0; left: 0; font-size: 5.5em; opacity: 0.1">{{ s.rank }}</span><div class='text-left' style='font-size:1.1em;'>{{ s.name }}</div></a>
+		</li>
+	{%endfor%}
+	</ul>
+	<br>
+	<div class='row'>
+<div class="tab-content col-xs-12" >	
+{%for s in sections%}
+	<div id="tabs-{{s.rank}}" class="row review-section tab-pane {% if forloop.first %} active {% endif %}">
+		<input name="sectionid" type="hidden" value="{{s.rank}}"/>
+		<div class='col-xs-12 text-center'>
+			<!--row 1 column 1 -->
+			<div class="col-xs-2">
+				<p class="comment-btn pointme" style="max-height:30px;">Reviewer Comments<span style="visibility:hidden; color:red;cursor:default;"><br>unsaved</span></p>
+			</div>                         
+
+			<!--row 1 column 2 -->
+			<div class="col-xs-10">
+                <div class='row'>
+					<div class="comment-display col-xs-12" style="z-index: 2; position: absolute; background-color: gray; padding:1%;border-radius:3px;display:none;">
+						<div class='col-xs-12'>
+							<div class='row'>
+							<span><button type="button" class="btn btn-default btn-primary small-button" style='height:70px;'>SAVE</button></span>
+							{% csrf_token %}
+					        <div class='col-xs-11' style='padding-right:0px;'>
+					        	<textarea name="comment" class="edit-surface form-control" type="text" placeholder="Add a comment..." rows="10">{%for c in comments%}{% if c.section = s %}{{c}}{% endif %}{% endfor %}</textarea>	 
+					        </div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+
+				<div class="row">
+				  		<div class="col-xs-3  thumbnail" style="height:47px; margin-right:1%; margin-bottom:1%;">NEEDS ATTENTION</div>
+				  		<div class="col-xs-3  thumbnail" style="height:47px; margin-right:1%; margin-bottom:1%;">MEETS REQUIREMENTS</div>
+				  		<div class="col-xs-3  thumbnail" style="height:47px; margin-right:1%; margin-bottom:1%;">EXEMPLARY </div>				  		
+				</div>
+			</div>
+	    </div>
+
+	    
+		{% for question in s.questions %}			
+	    <div class='col-xs-12 text-center' >
+			<!--row n column 1 -->
+			<div class="col-xs-2" style='height:200px;'><p class="guide-btn pointme">Guideline {{question.text}}</p></div>
+			<!--row n column 2 -->
+			<div class="col-xs-10">
+				<div class='row'>
+					<div class="guide-display col-xs-12" style="z-index: 2; position: absolute; background-color: gray; padding:1%;border-radius:3px;display:none;">
+		                <div class='guide-text col-xs-11 text-left' style='padding-right:0px;color:white;'>
+							{{ question.guide|safe }} 
+		                </div>
+					</div>
+				</div>
+				
+				<div class=" selectableactivestyle row ">
+					<input name="questionid" type="hidden" value="{{question.id}}"/>			
+					{% for i in question.getOptions %}
+						<div class="{% for r in responses %} {% if question.id = r.question and i.rank = r.response %} chosen {% endif %} {% endfor %}ui-state-default {% if not submitted %} choices  {% endif %} {% if submitted %} showDialog  {% endif %} col-xs-3 thumbnail" style='height:190px;margin-right:1%; margin-bottom:1%;'>
+							<input type="hidden" name="choice" value="{{i.rank}}"/>					
+							{% csrf_token %}
+							<p style='padding:3%;'>{% autoescape off %}{{i.text}}{% endautoescape %}</p>											
+						</div>			
+					{% endfor %}									  		
+				</div>
+			</div>
+        
+        </div>
+		{% endfor%}
+
+	</div>
+{%endfor%} 
+</div>
+</div>
+<!-- END of Sections -->
+	
+</div>
+</form>
+</div>
+<!-- <div id="dialog" title="Review Instructions" style="display:none">
+  <p>Your review has already been added to the report.</p>
+  <p>Click "edit responses" at the top/right of this page to make changes to your review.</p>
+</div> -->
+<div class="modal fade" id='dialog'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Review Instructions</h4>
+      </div>
+      <div class="modal-body">
+		  <p>Your review has already been added to the report.</p>
+		  <p>Click <strong>"edit responses"</strong> at the top/right of this page to make changes to your review.</p>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+
+
+{%  block page-level-scripts %}
+<script src="{{STATIC_URL}}js/review.js"></script>
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Studio Analytics' %}{% endblock %}
+{% block extrastyle %}
+	<link rel="stylesheet" href="{{STATIC_URL}}css/custom-base.css">
+	<link rel="stylesheet" href="https://clt.manoa.hawaii.edu/lib/css/clt-fonts/MyFontsWebfontsKit.css">
+{% endblock %}
+
+{% block branding %}
+<div>
+	<div><img style="width: 320px" src="https://llc.manoa.hawaii.edu/wp-content/uploads/2013/04/CLTlogo2013.jpg"></div>
+	<h2>Online Course Review Administration Panel</h2>
+</div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

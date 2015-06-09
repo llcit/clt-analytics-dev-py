@@ -1,0 +1,56 @@
+{% extends "wrap.html" %}
+{% block content %}
+<div id="surveycontent">
+	<h2>{{review}}: {{review.presurv}}</h2>
+				
+	<input name="revid" id="review-id" type="hidden" value="{{review.id}}"/>
+	
+	<form id="respform" method="post">
+		{% csrf_token %}
+		<ul style='font-size:130%;list-style-type: none;'>
+		{% for question in survey %}
+			{% if question in responses %}FOUND{% endif %}
+			<li class="form-line" style='margin-bottom:1%;'>
+				<div>{{forloop.counter}}.<span style="margin-left: 1em">{{question.text}}</span></div>
+			
+				{% if question.getOptions %}
+			
+					{% for j in question.getOptions %}
+						<div style="margin-left: 1.6em"> 
+							<input name="{{question.id}}" type="radio" value="{{j}}" 
+								{% for r in responses %}
+									{% if question.id = r.question.id %}
+										class="radioinput required"
+										{% if r.response = j.text %} checked="true"{% endif %}
+									{% endif %}
+								{% endfor%}
+							>{{j}}</input>
+						</div>
+					{% endfor %}	
+				
+				{% else %}
+				
+					<div class='row' style="margin-left: 1.6em" >
+						<div class='col-xs-6'>
+						<textarea class="form-control " rows="2" name="{{question.id}}" value="" placeholder="Add your response here..." class="textinput">{% for r in responses %}{% if question.id = r.question.id %}{{r.response}}{% endif %}{% endfor%}</textarea>
+						<div>
+					</div>
+				
+				{% endif %}
+			</li>
+		{% endfor%}
+		</ul>
+	</form>
+
+	<div class="col-xs-2 col-xs-offset-5" style=''>
+		<button id="submitter" value="Submit Answer" type="button" class="btn btn-primary btn-lg btn-block">Submit Answer</button>
+	</div>
+</div>
+<div id="ajaxmsg" class="grid_8 prefix_2 suffix_2" style="text-align: center"></div>
+
+{% endblock %}
+
+{%  block page-level-scripts %}
+<script src="{{STATIC_URL}}js/survey.js"></script>
+{% endblock %}
+

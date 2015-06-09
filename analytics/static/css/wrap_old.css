@@ -1,0 +1,156 @@
+/*GLOBALS*/
+.Nexa-Book { 
+	font-family: Nexa-Book;
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	/*font-family:  'Source Sans Pro', sans-serif;*/
+	font-family: Nexa-Book;	
+	font-size: 1.05em;
+}
+
+html, body { 
+	height: 100%; 
+} 
+
+.clicker {
+	cursor: pointer;
+}
+body {
+   margin: 0px;
+   padding: 0px;
+}
+
+a, a:visited { 
+	text-decoration:none;
+	color: #5c89ae;
+}
+
+a:hover { 
+	color: #333333;
+	text-decoration: underline;
+}
+
+
+/*TOP LEVEL WRAPS*/
+div#wrapper {}
+
+div#pagewrap {}
+
+div#headerwrap {font-size: 1.0em;}
+
+div#subheaderwrap {
+	height: auto;
+	color: black;
+	background: #fff;
+	font-size: 0.8em;
+}
+
+div#contentwrap {}
+
+
+/*FOOTER*/
+div#footer {   	
+	text-align: center;
+	font-weight: 350;
+	font-size: 0.8em;
+}
+
+.border {
+	height: auto;
+	border-top: 1px solid #333;
+	color: #333;	
+}
+
+/*HEADER*/
+.header-menu-left {	
+	float: left;
+}
+
+.header-menu-left a {
+	font-weight: 300;
+	line-height: 1.25em;
+}
+
+.header-menu-right {
+	float: right;
+	font-size: 0.8em;
+}
+
+.header-title {
+	font-size: 1.6em;
+	margin: 0.3em 0.3em 0.3em 0.3em;	
+}
+
+
+/*TEXTS*/
+
+.subtext {
+	font-size: 0.5em;
+}
+
+.medtext {
+	font-size: 1.0em;
+}
+
+.white-text {
+	color: #ffffff;
+	opacity: 1.0;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+/*PANELS*/
+.clickpanel { 
+	width: 115px;
+	height: 140px;
+	margin: 50px;
+	border: 1px dotted rgba(0, 0, 0, 0.54);
+	/*background-color: rgba(78, 78, 80, 0.901961);*/
+	color: #333;
+	font-size: 100%;
+	font-weight: 400;
+	display: inline-block;  
+    vertical-align: middle;	
+}
+
+.clicksubpanel {
+	text-align: center;
+	float: left;
+	font-size: 0.7em;
+	background-color: #ffffff;
+	color: #000000;
+	border: 1px solid #000000;
+	opacity: 0.9;
+}
+
+.help-panel {
+	width: 320px;
+	height: auto;
+	text-align: left;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.9); 
+	color: white;
+	border: 1px dotted black;
+	padding: 5px;
+	font-size: 0.9em;
+	z-index: 1000;
+	position: absolute;
+	
+}
+
+form {
+	width: 100%;
+	font-size: 0.8em
+}
+
+table {
+	font-size: 0.6em;
+}
+
+
+

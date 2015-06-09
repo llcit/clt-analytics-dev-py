@@ -1,0 +1,11 @@
+#footer{
+    bottom: -50px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.selected, .chosen{
+  background-color: #ddd;
+}

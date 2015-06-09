@@ -1,0 +1,52 @@
+.borderless td {
+    border-top: 1px solid white !important;
+}
+
+.score3 { /*WAS EXEMPLARY*/
+	/*background-color: #dff0d8 !important;*/
+	background-color: 	 #B0E57C !important;
+	border: 1px solid white;
+}
+.score2 { /*WAS EFFECTIVE*/
+	/*background-color: #f5f5f5 !important;*/
+	background-color: #b2b2b2 !important;
+	border: 1px solid white;
+}
+.score1{ /*WAS BASELINE*/
+	/*background-color: #f2dede !important;*/
+	background-color: #ff7e7a !important;
+	border: 1px solid white;
+}
+.displayInline{
+	display: inline !important;
+}
+.icon-flipped {
+    transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+}
+
+.nodisplay{
+	display:none;
+}
+/*.faiconRed{
+	color:#e74c3c;
+}
+.faiconGreen{
+	color:#2ecc71;
+}
+.faiconGrey{
+	color:#7f8c8d;
+}
+*/
+
+@media print {
+	body, p, h3, span, div, i, b, a {
+		font-family: "Georgia", "Times New Roman", "serif";
+	}
+    .hide_from_printer {
+    	display:none;
+    }
+}
+

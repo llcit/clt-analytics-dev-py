@@ -1,0 +1,93 @@
+{% extends "wrap.html" %}
+
+{% block content %}
+<div class="row text-left">
+	{% if reviews %}<div class="col-md-6" ><h3>Courses You Can Review</h3></div>{% endif %}
+	{% if courses %}<div class="col-md-6" ><h3>Your Courses Under Review</h3></div>{% endif %}
+</div>
+
+<div class="row text-center">	
+	<div class="col-md-6">
+		{% if reviews %}			
+			{% for i in reviews %}				
+			<div class="row">
+				<div class="col-md-6 text-left">
+					<h4><a href="{{SITE_ROOT}}/review/{{i.id}}">{{i}}</a></h4>
+				</div>	
+				<div class="col-md-6 text-right">
+					<h4>
+					<span class="text-primary"> &nbsp; <a href="{{SITE_ROOT}}/review/info/{{i.id}}">info</a>&nbsp; |</span>
+					
+						{% if i in reports%}
+						    {% for k in reports_submit_status %}
+						        {% if k.review = i  and k.submitdate %}
+						            {% if not k.submitdate == thedate %}						            	    
+							            <span class="text-success" >&nbsp;submitted&nbsp;</span>
+						            {% else %} 
+							            <span class="text-danger">&nbsp;in progress&nbsp;</span>
+							            <span >
+							            {% for r in responses %} 
+								            {% if i.id = r.id %} <span>{{r.cnt}}/{{i.questions|length}}</span>{% endif %}
+							            {% endfor %}
+							            </span>
+							        {% endif %}
+							    {% endif %}
+							{% endfor %}
+						{% endif %}
+					</h4>
+				</div>				
+				<div class="border col-md-12">
+					<p style='margin: 0px; border-top: 1px solid #000; height:1px;'> </p>
+				</div>
+
+			</div>
+			{% endfor%}
+		{% endif %}
+	</div>
+	
+	<div class="col-md-6">
+		{% if courses %}
+			{% for i in courses %}
+
+			<div class="row">
+				<div class="col-md-6 text-left">
+					<h4><a href="{{SITE_ROOT}}/review/{{i.id}}">{{i}}</a></h4>
+				</div>
+
+				<div class="col-md-6 text-right">
+					<h4>
+					<span class="text-primary" > &nbsp; <a href="{{SITE_ROOT}}/review/prep/{{i.id}}">pre survey</a> | </span>
+					<span class="text-primary" > &nbsp; <a href="{{SITE_ROOT}}/review/info/{{i.id}}">info</a> | </span>
+
+                    {% if i in reports%}
+					    {% for k in reports_submit_status %}
+					        {% if k.review = i  and k.submitdate %} 
+					            {% if not k.submitdate == thedate %}     
+						            <span class="text-success"> submitted</span>
+					            {% else %} 
+						            <span class="text-danger" style="color: red"> in progress</span>
+						            <span >
+						            {% for r in responses %} 
+							            {% if i.id = r.id %}<span>{{r.cnt}}/{{i.questions|length}}</span>{% endif %}
+						            {% endfor %}
+						            </span>
+						        {% endif %}
+						    {% endif %}
+						{% endfor %}
+					{% endif %}
+					</h4>            
+				</div>
+				
+				<div class="border col-md-12">
+					<p style='margin: 0px; border-top: 1px solid #000; height:1px;'> </p>
+				</div>
+
+			</div>
+
+
+			{% endfor%}
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}
