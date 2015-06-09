@@ -21,7 +21,7 @@
 		    <div id="headerwrap" class="row hide_from_printer" >
 				<input id="siteroot" type="hidden" value="{{SITE_ROOT}}"/>
 
-				<div class="header-menu-left col-md-5" style=''><a href="https://clt.manoa.hawaii.edu/analytics" target="_blank"><img class="img-responsive" width="360px" src="{{STATIC_URL}}ONLINE-COURSE-REVIEW-SYSTEM.png"></a></div>
+				<div class="header-menu-left col-md-5" style=''><a href="https://clt.manoa.hawaii.edu/analytics"><img class="img-responsive" width="360px" src="{{STATIC_URL}}ONLINE-COURSE-REVIEW-SYSTEM.png"></a></div>
 
 	    		<div class="header-menu-right col-md-7" style="text-align: right; margin-right: 0px; margin-top: 5px;">
 		    		{% if user.is_authenticated %}
@@ -64,7 +64,7 @@
 			<div  class="text-center"><a href="{{SITE_ROOT}}">home</a></div>
 		</div>
 		<div class='row'>
-			<div  class="text-center">{% block footer %} {% endblock %} <a href="https://clt.manoa.hawaii.edu"> &copy; 2015 Center for Language & Technology</a></div>
+			<div  class="text-center">{% block footer %} {% endblock %} <a href="https://clt.manoa.hawaii.edu" target="_blank"> &copy; 2015 Center for Language & Technology</a></div>
 		</div>
 	</div>
 	</div><!--END WRAPPER -->
