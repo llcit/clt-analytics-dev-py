@@ -4,9 +4,7 @@ import os
 from unipath import Path
 PROJECT_DIR = Path(__file__).ancestor(3) # Points to top level directory
 
-SITE_ROOT = ''
-SITE_NAME = 'Teaching Analytics @ the Center for Language & Technology'
-SITE_HOST = 'http://127.0.0.1'
+
 
 
 DEBUG = True
@@ -97,7 +95,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    
+
     # Added to allow access to SITE_ROOT parameter in templates
     'analytics.analytics_context_processors.site_root',
 )
@@ -109,10 +107,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    
+
     # Uncomment to use CAS 3 authentication at UH
     #'django_cas.middleware.CASMiddleware',
-    
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -148,7 +146,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    
+
     'review',
 )
 
@@ -181,7 +179,7 @@ LOGGING = {
     }
 }
 
-LOGIN_REDIRECT_URL = '%s/review'%(SITE_ROOT)                          #'/review'
-LOGIN_URL = '%s/accounts/login' %(SITE_ROOT)            #'/accounts/login'
+# LOGIN_REDIRECT_URL = '%s/review'%(SITE_ROOT)                          #'/review'
+# LOGIN_URL = '%s/accounts/login' %(SITE_ROOT)            #'/accounts/login'
 
 

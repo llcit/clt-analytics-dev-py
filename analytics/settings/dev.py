@@ -1,6 +1,10 @@
 # dev.py
 from .base import *
 
+SITE_ROOT = ''
+SITE_NAME = 'Teaching Analytics @ the Center for Language & Technology'
+SITE_HOST = 'http://localhost:8000'
+
 # Secret key stored in your local environment variable not here.
 SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -24,3 +28,5 @@ DATABASES = {
 INSTALLED_APPS += (
     'debug_toolbar',
 )
+
+LOGIN_URL = 'login-select'
