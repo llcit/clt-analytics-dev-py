@@ -4,7 +4,7 @@
 <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'> -->
 <!--     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400' rel='stylesheet' type='text/css'> -->
     <link rel="stylesheet" href="https://clt.manoa.hawaii.edu/lib/css/clt-fonts/MyFontsWebfontsKit.css">
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,16 +17,16 @@
 </head>
 <body>
 	<div id="wrapper" class="container-fluid" style='width:95%;'>
-		<div id="pagewrap" "height: 100%;">				
+		<div id="pagewrap" "height: 100%;">
 		    <div id="headerwrap" class="row hide_from_printer" >
 				<input id="siteroot" type="hidden" value="{{SITE_ROOT}}"/>
-				
-				<div class="header-menu-left col-md-5" style=''><a href="http://llc.manoa.hawaii.edu/" target="_blank"><img class="img-responsive" width="360px" src="{{STATIC_URL}}ONLINE-COURSE-REVIEW-SYSTEM.png"></a></div>
-	    		
+
+				<div class="header-menu-left col-md-5" style=''><a href="https://clt.manoa.hawaii.edu/analytics" target="_blank"><img class="img-responsive" width="360px" src="{{STATIC_URL}}ONLINE-COURSE-REVIEW-SYSTEM.png"></a></div>
+
 	    		<div class="header-menu-right col-md-7" style="text-align: right; margin-right: 0px; margin-top: 5px;">
 		    		{% if user.is_authenticated %}
 		    			<span><b>Online Course Review {% block reviewname %}{% endblock %}</b></span>
-		    			<span>|&nbsp;<a href="{{SITE_ROOT}}/review">reviews</a></span>		    			
+		    			<span>|&nbsp;<a href="{{SITE_ROOT}}/review">reviews</a></span>
 		    			{% if user.is_staff %}
 		    			<span>|&nbsp;<a href="{{SITE_ROOT}}/admin" target="_blank">admin</a></span>
 		    			{% endif %}
@@ -34,12 +34,12 @@
 		    		{% else %}
 		    			<span><a href="{{SITE_ROOT}}/accounts/login"> login </a></span>
 		    		{% endif %}
-	    		</div> 
+	    		</div>
     			<h4 class="header-menu-left col-md-10"></h4>
     			<h4 class="header-menu-right col-md-2" style="text-align: right;">
     				{% block help_pdf %}{% endblock %}
     			</h4>
-		    	
+
 		    </div> <!-- END HEADERWRAP -->
 
 	    	<div class='row'>
@@ -47,18 +47,18 @@
 		    		{% block appmenu %}{% endblock %}
 		    	</div>
 	    	</div>
-	    	
-	    	<div class='row'>		
+
+	    	<div class='row'>
 			    <div id="contentwrap" class="col-md-12" >
 			    	{% block content %}{% endblock %}
 			    </div>
 			</div>
 	</div><!--END PAGEWRAP -->
-	
-	
+
+
 	<div id="footer">
 		<div class='row'>
-			<div class="border col-md-12 " style='border-top: 1px solid #dddddd; height:1px;'><p></p></div>		
+			<div class="border col-md-12 " style='border-top: 1px solid #dddddd; height:1px;'><p></p></div>
 		</div>
 		<div class='row'>
 			<div  class="text-center"><a href="{{SITE_ROOT}}">home</a></div>
@@ -66,7 +66,7 @@
 		<div class='row'>
 			<div  class="text-center">{% block footer %} {% endblock %} <a href="/"> &copy; 2014 Center for Language & Technology</a></div>
 		</div>
-	</div>  
+	</div>
 	</div><!--END WRAPPER -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
