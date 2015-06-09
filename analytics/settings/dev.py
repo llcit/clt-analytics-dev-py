@@ -29,4 +29,4 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
-LOGIN_URL = 'login-select'
+LOGIN_URL = 'login-screen'

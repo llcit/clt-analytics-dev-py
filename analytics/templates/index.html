@@ -4,11 +4,11 @@
 {% block content %}
 <br>
 <div class='row'>
-	<div class="col-md-12">	 
-		{% if user.is_authenticated %} 
+	<div class="col-md-12">
+		{% if user.is_authenticated %}
 			<p class="lead">You are logged in as {{user}}. Click <a href="{{SITE_ROOT}}/review">here</a> to see your review(s). </p>
 		{% else %}
-			<p class="lead">Welcome! Click <a href="{{SITE_ROOT}}/review">here</a> to see online course reviews you are associated with (requires UH username and password).</p>
+			<p class="lead">Welcome! Click <a href="/local/login/">here</a> to see online course reviews you are associated with (requires UH username and password or Guest account).</p>
 		{% endif %}
 	</div>
 </div>

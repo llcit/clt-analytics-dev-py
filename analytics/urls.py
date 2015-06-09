@@ -16,10 +16,11 @@ urlpatterns = patterns('',
     # include to use the framework logout views
     url(r'^logout/', 'django.contrib.auth.views.logout'),
 
-    url(r'^login-select/', 'analytics.views.login_select', name='login-select'),
+    # Guest/Non-UH login form
+    url(r'^login/', 'analytics.views.local_login', name='login-screen'),
 
-    # Guest/Non-UH user
-    url(r'^guest/login/', 'analytics.views.local_login', name="local-login"),
+    # Guest/Non-UH user login handler
+    url(r'^guest/login/', 'analytics.views.local_login_handler', name="local-login"),
 
     #Use the following for UH Auth
     # url(r'^accounts/login/$', 'django_cas.views.login'),

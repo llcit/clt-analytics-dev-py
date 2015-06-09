@@ -1,0 +1,29 @@
+<!-- local_login.html -->
+{% extends "wrap.html" %}
+
+
+{% block content %}
+
+
+<div class='row'>
+    <div class="col-md-4 col-md-offset-1">
+        <legend>Use your <strong>UH</strong> Username and Password.</legend>
+        <a href="/accounts/login"><button type="submit" class="btn btn-block btn-default">UH Login</button></a>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        {% if errormsg %}<h2 class="bg-danger">{{ errormsg }}</h2>{% endif %}
+        <legend>
+            Don't have a UH Username?<br>
+            Use your <strong>Guest</strong> Username and Password.<br>
+            <small>(guest accounts are issued by request)</small>
+        </legend>
+        <form method="post" action="/guest/login/">{% csrf_token %}
+            <p><label>Username</label> <input type="text" name="username"></p>
+            <p><label>Password</label> <input type="password" name="passwd"></p>
+            <p><button type="submit" class="btn btn-block btn-default">Login</button></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
