@@ -12,9 +12,9 @@ urlpatterns = patterns('',
     url(r'^$', 'analytics.views.index'),
 
     # include to use the django framework login views
-     url(r'^accounts/login/', 'django.contrib.auth.views.login', name='remote-login'),
+     # url(r'^accounts/login/', 'django.contrib.auth.views.login', name='remote-login'),
     # include to use the framework logout views
-     url(r'^logout/', 'django.contrib.auth.views.logout', name='logout'),
+     # url(r'^logout/', 'django.contrib.auth.views.logout', name='logout'),
 
     # Guest/Non-UH login form
     url(r'^login/', 'analytics.views.local_login', name='login-screen'),
@@ -23,8 +23,8 @@ urlpatterns = patterns('',
     url(r'^guest/login/', 'analytics.views.local_login_handler', name="local-login"),
 
     #Use the following for UH Auth
-    # url(r'^accounts/login/$', 'django_cas.views.login'),
-    # url(r'^logout/$', 'django_cas.views.logout'),
+    url(r'^accounts/login/$', 'django_cas.views.login'),
+    url(r'^logout/$', 'django_cas.views.logout'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
