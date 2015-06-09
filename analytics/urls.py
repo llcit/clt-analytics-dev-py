@@ -23,8 +23,8 @@ urlpatterns = patterns('',
     url(r'^guest/login/', 'analytics.views.local_login_handler', name="local-login"),
 
     #Use the following for UH Auth
-    url(r'^accounts/login/$', 'django_cas.views.login'),
-    url(r'^logout/$', 'django_cas.views.logout'),
+    url(r'^accounts/login/$', 'django_cas.views.login', name='remote-login'),
+    url(r'^logout/$', 'django_cas.views.logout', name='logout'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
