@@ -12,9 +12,9 @@ urlpatterns = patterns('',
     url(r'^$', 'analytics.views.index'),
 
     # include to use the django framework login views
-     url(r'^accounts/login/', 'django.contrib.auth.views.login'),
+     url(r'^accounts/login/', 'django.contrib.auth.views.login', name='remote-login'),
     # include to use the framework logout views
-     url(r'^logout/', 'django.contrib.auth.views.logout'),
+     url(r'^logout/', 'django.contrib.auth.views.logout', name='logout'),
 
     # Guest/Non-UH login form
     url(r'^login/', 'analytics.views.local_login', name='login-screen'),
