@@ -1,5 +1,5 @@
 /*GLOBALS*/
-.Nexa-Book { 
+.Nexa-Book {
     font-family: Nexa-Book;
     font-weight: normal;
     font-style: normal;
@@ -7,8 +7,8 @@
 
 
 * {
-/*     font-family:  'Source Sans Pro', sans-serif; */
-    font-family: Nexa-Book; 
+    font-family:  'Source Sans Pro', sans-serif;
+    /*font-family: Nexa-Book; */
     font-size: 1.00em;
 }
 
