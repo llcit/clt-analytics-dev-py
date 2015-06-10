@@ -14,10 +14,11 @@ def index(request):
 
 
 def local_login(request):
-    if request.user.is_authenticated():
-        return render_to_response('index.html', context_instance=RequestContext(request))
-
-    return render_to_response('login.html', context_instance=RequestContext(request))
+    # if request.user.is_authenticated():
+    #     return render_to_response('index.html', context_instance=RequestContext(request))
+    # print request.GET
+    context = {'request': request}
+    return render_to_response('login.html', context, context_instance=RequestContext(request))
 
 
 def local_login_handler(request):
@@ -33,7 +34,6 @@ def local_login_handler(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                print 'user authenticated'
                 return render_to_response('index.html', context_instance=RequestContext(request))
             else:
                 errormsg = 'Sorry, your account has been disabled.'
