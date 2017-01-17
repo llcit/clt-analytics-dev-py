@@ -112,9 +112,19 @@ MIDDLEWARE_CLASSES = (
     #'django_cas.middleware.CASMiddleware',
 
     # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
+)
+# set CAS SERVER FIRST
+CAS_SERVER_URL = 'https://cas-test.its.hawaii.edu/cas/login'
+# set CAS VERSION: default is CAS2
+CAS_VERSION = 'CAS_2_SAML_1_0'
+# set redirection after login
+CAS_REDIRECT_URL = '/'
 # Uncomment to use CAS 3 authentication at UH
 #AUTHENTICATION_BACKENDS = (
 #   'django.contrib.auth.backends.ModelBackend',
@@ -144,6 +154,7 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'django_cas_ng',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
