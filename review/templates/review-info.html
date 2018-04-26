@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-12" >
-		<h3>{{review}}<small>
+		<h3>{{ review.coursetitle }}<small>
 			<a href="{{SITE_ROOT}}/review/{{review.id}}">(view review questions)</a>
 			<input name="revid" id="review-id" type="hidden" value="{{review.id}}"/>
 		</small></h3>
@@ -41,21 +41,21 @@
 <div class="row">
 	<div class="col-md-12" >
 	{% if not survresponses.count %}
-		<h4>{{review.presurv}} 
+		<h4>{{review.presurv}}
 			<small style='color:black;'>Survey not completed.</small>
 			{% if user in review.instructors.all %}
 			<small style='color:black;'>Instructor of {{review}} can submit survey <a href="{{SITE_ROOT}}/review/prep/{{review.id}}">here</a></small>
 			{% endif %}
 		</h4>
-		
+
 	{% else %}
 		<p class="">{{review.presurv}} <span class="subtext"><a href="{{SITE_ROOT}}/review/prep/{{review.id}}"></a></span></p>
-		
+
 		<table style='font-size:0.9em;'>
 			{% for r in survresponses %}
 				<tr><td>{{r.question}}</td><td><i>{{r.response}}</i></td></tr>
 			{% endfor %}
-		</table>	
+		</table>
 	{% endif %}
 	</div>
 </div>

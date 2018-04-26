@@ -1,5 +1,4 @@
-from django.shortcuts import redirect, render_to_response
-from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.db.models import Count
@@ -8,19 +7,17 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 import analytics.settings
 
-
 def index(request):
-    return render_to_response('index.html', context_instance=RequestContext(request))
-
+    return render(request, 'index.html')
 
 def local_login(request):
     context = {'request': request}
-    return render_to_response('login.html', context, context_instance=RequestContext(request))
+    return render(request, 'login.html', context)
 
 
 def local_login_handler(request):
     if request.user.is_authenticated():
-        return render_to_response('index.html', context_instance=RequestContext(request))
+        return render(request, 'index.html')
 
     errormsg = 'The username and password were incorrect.'
     if request.POST:
@@ -36,4 +33,4 @@ def local_login_handler(request):
             else:
                 errormsg = 'Sorry, your account has been disabled.'
 
-    return render_to_response('login.html', {'errormsg': errormsg}, context_instance=RequestContext(request))
+    return render(request, 'login.html', {'errormsg': errormsg})

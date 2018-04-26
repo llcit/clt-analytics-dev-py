@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -12,8 +12,6 @@ from django.conf import settings
 import pytz
 import json
 
-
-
 @login_required
 def securehome(request):
     if request.GET.get('ticket'):
@@ -26,15 +24,14 @@ def securehome(request):
         reports_submit_status = ReviewReportStatus.objects.filter(reviewer = request.user)#.filter(review__id = rev)
         thedate = datetime(2012, 5, 18, 13, 0, 49, 0, pytz.UTC)
         #import pdb; pdb.set_trace()
-        return render_to_response('review-index.html',
+        return render(request, 'review-index.html',
                                   {'reviews' : reviews,
                                    'courses' : courses,
                                    'reports' : reports.all(),
                                    'responses' : responses,
                                    'reports_submit_status' : reports_submit_status,
-                                   'thedate' : thedate
-                                   },
-                                  context_instance=RequestContext(request))
+                                   'thedate' : thedate}
+                                  )
 
 @login_required
 def displayReviewQuestions(request, rev):
@@ -60,15 +57,15 @@ def displayReviewQuestions(request, rev):
     if request.user not in accessors and request.user not in instructors:
         return HttpResponseRedirect('/analytics')
 
-    return render_to_response('review.html',
+    return render(request, 'review.html',
                               {
                                'review' : review,
                                'sections' : sections,
                                'responses': responses,
                                "comments": comments,
                                "submitted":submitted
-                               },
-                               context_instance=RequestContext(request))
+                               }
+                               )
 
 @login_required
 def displayReviewInfo(request, rev):
@@ -107,15 +104,15 @@ def displayReviewInfo(request, rev):
     survresp = SurveyResponse.objects.filter(review__id = review.id)
     reviewersreport = ReviewReportStatus.objects.filter(review__id = rev).values("reviewer")
 
-    return render_to_response('review-info.html', {
+    return render(request, 'review-info.html', {
                               'review' : review,
                               'reviewers': reviewers,
                               'instructors': instructors,
                               "survresponses": survresp,
                               "report": reviewersreport.all(),
                               'response_matrix': response_matrix
-                              },
-                              context_instance=RequestContext(request))
+                              }
+                              )
 
 @login_required
 def printReviewReport(request, rev):
@@ -152,14 +149,14 @@ def printReviewReport(request, rev):
         response_matrix.append(question_response_obj)
 
 
-    return render_to_response('review-print.html', {
+    return render(request, 'review-print.html', {
                               'review' : review,
                               'reviewers': reviewers,
                               'instructors': instructors,
                               'comments': comments,
                               'response_matrix': response_matrix
-                              },
-                              context_instance=RequestContext(request))
+                              }
+                              )
 
 
 @login_required
@@ -168,12 +165,12 @@ def preSurvey(request, rev):
     #responses = SurveyResponse.objects.filter(review__id = rev).annotate(res = Count("question__text"))
     responses = SurveyResponse.objects.filter(review__id = rev)
 
-    print responses
-    return render_to_response('survey.html',
+    print (responses)
+    return render(request, 'survey.html',
                               {'review': review,
                                'survey' : review.presurv.questions,
-                               'responses': responses},
-                              context_instance=RequestContext(request))
+                               'responses': responses}
+                               )
 
 @login_required
 def reportReview(request, rev):
@@ -343,7 +340,7 @@ def submitPrep(request):
                     response.user = request.user
                     response.response = value
                     response.save()
-                    print response
+                    print (response)
                 else:
                     response = response[0]
                     response.response = value
@@ -374,6 +371,3 @@ def submitPrep(request):
     #            comment.text = comm
     #            comment.postdate = datetime.now()
     #            comment.save()
-
-
-

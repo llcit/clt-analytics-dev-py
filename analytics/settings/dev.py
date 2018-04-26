@@ -6,10 +6,14 @@ SITE_NAME = 'Teaching Analytics @ the Center for Language & Technology'
 SITE_HOST = 'http://localhost:8000'
 
 # Secret key stored in your local environment variable not here.
-SECRET_KEY = os.environ['SECRET_KEY']
+try:
+    # PRODUCTION SHOULD use this 'SECRET_KEY'!!!
+    SECRET_KEY = os.environ['SECRET_KEY']
+except:
+    # DO NOT USE THIS 'SECRET_KEY' because it is a sample and published in the github repo.
+    SECRET_KEY =['5jrad@)cbj&af%a3h8l#0+086x%b)4u)7$+2=5)#pu$&u*tk=e']
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -27,6 +31,10 @@ DATABASES = {
 # Append apps used in development not production.
 INSTALLED_APPS += (
     'debug_toolbar',
+)
+
+MIDDLEWARE_CLASSES += (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 LOGIN_URL = 'login-screen'

@@ -5,10 +5,10 @@
 
 <div>
 	<h2 class="hidden-print"><a href="javascript:window.print()"> <span class="label label-primary">Print</span></a>	</h2>
-	<h3>Online Course Review for {{ review }}
+	<h3>Online Course Review for {{ review.coursetitle }}
 		<small class="hidden-print"><a href="{{SITE_ROOT}}/review/info/{{review.id}}"> back to report</a> </small>
 	</h3>
-	<p>Instructor{{ instructors.length | pluralize }}: 
+	<p>Instructor{{ instructors.length | pluralize }}:
 		{% for i in instructors %} {{ i }} (<i>Dept</i>: {{i.get_profile.department}}){% if not forloop.last %},{% endif %} {% endfor %}
 	</p>
 	<p>Course URL: <a href="{{ review.siteurl }}">{{ review.siteurl }}</a>  </p>
@@ -23,7 +23,7 @@
 	<div class="col-md-12"><p>
 		{% for i in comments %}
 			{% ifchanged i.section %}<h4>{{ i.section }}</h4><p style="border-bottom: 1px solid black"></p>{% endifchanged %}
-			<p style="margin-left: 2.0em; margin-right: 2.0em; background-color: {% cycle 'white' '#D7D8D8' %}">{{ i }}</p>			
+			<p style="margin-left: 2.0em; margin-right: 2.0em; background-color: {% cycle 'white' '#D7D8D8' %}">{{ i }}</p>
 		{% endfor %}
 	</p></div>
 </div>
@@ -47,12 +47,12 @@
 		</div>
 	</div>
 <!-- Results matrix -->
-	<div class="col-md-12 resultswrap">    	
+	<div class="col-md-12 resultswrap">
 		<!-- Response rows  -->
 		{% for i in response_matrix %}
-		
-		{% ifchanged i.0.section %}		
-		<div class="row section-header">			
+
+		{% ifchanged i.0.section %}
+		<div class="row section-header">
 			<!-- Section header -->
 			<div class="col-md-12"><h4>{{ i.0.section }} </h4></div>
 		</div>
@@ -62,7 +62,7 @@
 			<!-- Matrix row -->
 			<div class="col-md-1">{{ i.0 }}</div>
 			<div class="col-md-11">
-				<div class="btn-group btn-group-justified">  				
+				<div class="btn-group btn-group-justified">
 					{% for j in i.1 %}
 					    <div class="btn-group">
                     		<button type="button" class="btn btn-default text-center" data-toggle="popover" data-placement="top" data-content="{{ j.1.getResponseText }}" title="{{ j.1.get_response_display }}">

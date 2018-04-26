@@ -2,9 +2,9 @@
 {% block content %}
 <div id="surveycontent">
 	<h2>{{review}}: {{review.presurv}}</h2>
-				
+
 	<input name="revid" id="review-id" type="hidden" value="{{review.id}}"/>
-	
+
 	<form id="respform" method="post">
 		{% csrf_token %}
 		<ul style='font-size:130%;list-style-type: none;'>
@@ -12,30 +12,30 @@
 			{% if question in responses %}FOUND{% endif %}
 			<li class="form-line" style='margin-bottom:1%;'>
 				<div>{{forloop.counter}}.<span style="margin-left: 1em">{{question.text}}</span></div>
-			
+
 				{% if question.getOptions %}
-			
+
 					{% for j in question.getOptions %}
-						<div style="margin-left: 1.6em"> 
-							<input name="{{question.id}}" type="radio" value="{{j}}" 
+						<div style="margin-left: 1.6em">
+							<input name="{{question.id}}" type="radio" value="{{j}}"
 								{% for r in responses %}
-									{% if question.id = r.question.id %}
+									{% if question.id == r.question.id %}
 										class="radioinput required"
-										{% if r.response = j.text %} checked="true"{% endif %}
+										{% if r.response == j.text %} checked="true"{% endif %}
 									{% endif %}
 								{% endfor%}
 							>{{j}}</input>
 						</div>
-					{% endfor %}	
-				
+					{% endfor %}
+
 				{% else %}
-				
+
 					<div class='row' style="margin-left: 1.6em" >
 						<div class='col-xs-6'>
-						<textarea class="form-control " rows="2" name="{{question.id}}" value="" placeholder="Add your response here..." class="textinput">{% for r in responses %}{% if question.id = r.question.id %}{{r.response}}{% endif %}{% endfor%}</textarea>
+						<textarea class="form-control " rows="2" name="{{question.id}}" value="" placeholder="Add your response here..." class="textinput">{% for r in responses %}{% if question.id == r.question.id %}{{r.response}}{% endif %}{% endfor%}</textarea>
 						<div>
 					</div>
-				
+
 				{% endif %}
 			</li>
 		{% endfor%}
@@ -53,4 +53,3 @@
 {%  block page-level-scripts %}
 <script src="{{STATIC_URL}}js/survey.js"></script>
 {% endblock %}
-

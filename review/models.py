@@ -76,7 +76,7 @@ class ReviewQuestion(models.Model):
     section = models.ForeignKey(
         ReviewSection, help_text=u"The section that this question is part of. The user sees each category in-order on a single page, with all questions belonging to the category on the page")
     text = models.CharField(max_length=1024)
-    rank = models.IntegerField(max_length=8)
+    rank = models.IntegerField()
     guide = models.TextField(blank=True)
 
     def getOptions(self):
@@ -99,7 +99,7 @@ class ReviewQuestionOption(models.Model):
     parent = models.ForeignKey(ReviewQuestion)
     text = models.TextField()
     answer = models.BooleanField(u"Is this the correct answer?", blank=True)
-    rank = models.IntegerField(max_length=3, choices=EVAL_SCALE,
+    rank = models.IntegerField(choices=EVAL_SCALE,
                                help_text=u"Scale. This also effects the order this option will appear.")
     type = models.CharField(max_length=48, choices=OPTION_CHOICES,
                             help_text=u"Allow multiple checks or only one (checkbox or radio)?", default='radio')
@@ -116,8 +116,8 @@ class Review(models.Model):
     survey = models.ForeignKey(ReviewSurvey)
     presurv = models.ForeignKey(Survey)
     instructors = models.ManyToManyField(
-        User, related_name="Course Instructor(s)")
-    reviewers = models.ManyToManyField(User, related_name="Course Reviewer(s)")
+        User, related_name="Course Instructor(s)+")
+    reviewers = models.ManyToManyField(User, related_name="Course Reviewer(s)+")
 
     siteurl = models.URLField()
     coursedesc = models.CharField(max_length=4096, blank=True)
@@ -125,7 +125,7 @@ class Review(models.Model):
     startdate = models.DateField(blank=True)
     completed = models.DateField(blank=True)
     accesscode = models.CharField(max_length=255, blank=True, unique=True, verbose_name='Access Code', validators=[
-                                  MinLengthValidator(10)], 
+                                  MinLengthValidator(10)],
                                   help_text=u"SEND THIS TO REVIEWERS TO GIVE THEM ACCESS:<br>https://llc.manoa.hawaii.edu/analytics/review/register/ACCESS_CODE_HERE")
 
     presurv.blank = True
@@ -165,7 +165,7 @@ class Review(models.Model):
     def surveyresponses(self):
         resp = SurveyResponse.objects.filter(
             review=self).order_by("review", "user", "question__rank")
-        print resp
+        print (resp)
         return resp
 
     def __unicode__(self):
@@ -176,7 +176,7 @@ class ReviewResponse(models.Model):
     review = models.ForeignKey(Review)
     question = models.ForeignKey(ReviewQuestion)
     user = models.ForeignKey(User)
-    response = models.IntegerField(max_length=3, choices=EVAL_SCALE)
+    response = models.IntegerField(choices=EVAL_SCALE)
     lastactivity = models.TimeField()
 
     def getResponseText(self):
@@ -224,7 +224,7 @@ class ReviewReportStatus(models.Model):
 class Question(models.Model):
     survey = models.ForeignKey(Survey)
     text = models.CharField(max_length=1024)
-    rank = models.IntegerField(max_length=8)
+    rank = models.IntegerField()
 
     def getOptions(self):
         return QuestionOption.objects.filter(parent__id=self.id).order_by('rank')
@@ -237,7 +237,7 @@ class QuestionOption(models.Model):
     parent = models.ForeignKey(Question)
     text = models.CharField(max_length=1024)
     answer = models.BooleanField(u"Is this the correct answer?")
-    rank = models.IntegerField(max_length=3, help_text=u"Display order?")
+    rank = models.IntegerField(help_text=u"Display order?")
     # TODO Make this an enumerator.
     type = models.CharField(max_length=48, choices=OPTION_CHOICES,
                             help_text=u"Allow multiple checks or only one (checbox or radio)?", default='radio')

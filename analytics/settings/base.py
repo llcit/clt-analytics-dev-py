@@ -4,11 +4,7 @@ import os
 from unipath import Path
 PROJECT_DIR = Path(__file__).ancestor(3) # Points to top level directory
 
-
-
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = False
 
 ADMINS = (
     ('CLT IT ADMIN', 'llcit@hawaii.edu'),
@@ -80,33 +76,46 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+                os.path.join(PROJECT_DIR, 'review/templates'),
+                os.path.join(PROJECT_DIR, 'analytics/templates'),
+            ],
+        'OPTIONS': {
+            'debug': DEBUG,
+            'context_processors': [
+                "django.template.context_processors.debug",
+                'django.template.context_processors.request',
+                "django.contrib.auth.context_processors.auth",
+                'django.contrib.messages.context_processors.messages',
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.contrib.messages.context_processors.messages",
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-
-    # Added to allow access to SITE_ROOT parameter in templates
-    'analytics.analytics_context_processors.site_root',
-)
-
+                # Added to allow access to SITE_ROOT parameter in templates
+                'analytics.analytics_context_processors.site_root',
+            ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            #     'django.template.loaders.eggs.Loader',
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Uncomment to use CAS 3 authentication at UH
     #'django_cas.middleware.CASMiddleware',
@@ -115,9 +124,28 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
+# Password validation
+# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
+     'django.contrib.auth.backends.ModelBackend',
+     'django_cas_ng.backends.CASBackend',
 )
 # set CAS SERVER FIRST
 CAS_SERVER_URL = 'https://cas-test.its.hawaii.edu/cas/login'
@@ -125,24 +153,19 @@ CAS_SERVER_URL = 'https://cas-test.its.hawaii.edu/cas/login'
 CAS_VERSION = 'CAS_2_SAML_1_0'
 # set redirection after login
 CAS_REDIRECT_URL = '/'
-# Uncomment to use CAS 3 authentication at UH
-#AUTHENTICATION_BACKENDS = (
-#   'django.contrib.auth.backends.ModelBackend',
-#   'django_cas.backends.CASBackend',
-#)
 
 ROOT_URLCONF = 'analytics.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'analytics.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_DIR, 'review/templates'),
-    os.path.join(PROJECT_DIR, 'analytics/templates'),
-)
+# TEMPLATE_DIRS = (
+#     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+#     # Always use forward slashes, even on Windows.
+#     # Don't forget to use absolute paths, not relative paths.
+#     os.path.join(PROJECT_DIR, 'review/templates'),
+#     os.path.join(PROJECT_DIR, 'analytics/templates'),
+# )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -151,7 +174,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.webdesign',
+
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django_cas_ng',
@@ -192,5 +215,3 @@ LOGGING = {
 
 # LOGIN_REDIRECT_URL = '%s/review'%(SITE_ROOT)                          #'/review'
 # LOGIN_URL = '%s/accounts/login' %(SITE_ROOT)            #'/accounts/login'
-
-
