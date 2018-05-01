@@ -7,7 +7,7 @@ SITE_HOST = 'http://localhost:8000'
 
 # Secret key stored in your local environment variable not here.
 try:
-    # PRODUCTION SHOULD use this 'SECRET_KEY'!!!
+    # PRODUCTION SHOULD USE THIS 'SECRET_KEY'!!!
     SECRET_KEY = os.environ['SECRET_KEY']
 except:
     # DO NOT USE THIS 'SECRET_KEY' because it is a sample and published in the github repo.
