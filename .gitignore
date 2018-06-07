@@ -38,6 +38,6 @@ Thumbs.db
 
 # Project specific exclusions #
 ############
-prod.py
-wsgi-prod.py
-analyticstestdb
+*.conf
+.envrc
+.pydevproject

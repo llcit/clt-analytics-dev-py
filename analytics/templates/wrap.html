@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +10,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{STATIC_URL}}font-awesome-4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{STATIC_URL}}css/wrap.css">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "font-awesome-4.0.3/css/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/wrap.css" %}">
     {% block page-level-css %}{% endblock %}
     <title>{% block title %} Studio Analytics: Center for Language & Technology {% endblock %}</title>
 
@@ -21,7 +23,7 @@
 		    <div id="headerwrap" class="row hide_from_printer" >
 				<input id="siteroot" type="hidden" value="{{SITE_ROOT}}"/>
 
-				<div class="header-menu-left col-md-5" style=''><a href="https://clt.manoa.hawaii.edu/analytics"><img class="img-responsive" width="360px" src="{{STATIC_URL}}ONLINE-COURSE-REVIEW-SYSTEM.png"></a></div>
+				<div class="header-menu-left col-md-5" style=''><a href="https://clt.manoa.hawaii.edu/analytics"><img class="img-responsive" width="360px" src="{% static "ONLINE-COURSE-REVIEW-SYSTEM.png" %}"></a></div>
 
 	    		<div class="header-menu-right col-md-7" style="text-align: right; margin-right: 0px; margin-top: 5px;">
 		    		{% if user.is_authenticated %}
@@ -64,14 +66,14 @@
 			<div  class="text-center"><a href="{{SITE_ROOT}}">home</a></div>
 		</div>
 		<div class='row'>
-			<div  class="text-center">{% block footer %} {% endblock %} <a href="https://clt.manoa.hawaii.edu" target="_blank"> &copy; 2018 Center for Language & Technology</a></div>
+			<div  class="text-center">{% block footer %} {% endblock %} <a href="https://clt.manoa.hawaii.edu" target="_blank"> &copy; 2015 Center for Language & Technology</a></div>
 		</div>
 	</div>
 	</div><!--END WRAPPER -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
-	<script src="{{STATIC_URL}}js/csrf-ajax.js"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+	<script src="{% static "js/csrf-ajax.js" %}"></script>
 	{%  block page-level-scripts %}{% endblock %}
 </body>
 </html>

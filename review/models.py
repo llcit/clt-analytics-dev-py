@@ -125,7 +125,7 @@ class Review(models.Model):
     startdate = models.DateField(blank=True)
     completed = models.DateField(blank=True)
     accesscode = models.CharField(max_length=255, blank=True, unique=True, verbose_name='Access Code', validators=[
-                                  MinLengthValidator(10)],
+                                  MinLengthValidator(10)], 
                                   help_text=u"SEND THIS TO REVIEWERS TO GIVE THEM ACCESS:<br>https://llc.manoa.hawaii.edu/analytics/review/register/ACCESS_CODE_HERE")
 
     presurv.blank = True

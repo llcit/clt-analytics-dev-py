@@ -1,14 +1,39 @@
 {% extends "wrap.html" %}
-
-
 {% block content %}
+
 <br>
 <div class='row'>
 	<div class="col-md-12">
-		{% if user.is_authenticated %}
+		{% if request.user.is_authenticated %}
 			<p class="lead">You are logged in as {{user}}. Click <a href="{{SITE_ROOT}}/review">here</a> to see your review(s). </p>
+			<hr>
+			<p class="lead">
+
+				The Online Course Review System is a web-based platform designed by the CLT. The System is based on the <a href="https://drive.google.com/file/d/0BzwfRm30Fnb6ZW82V01sUEdxSnM/view" target="_blank">Quality Guidelines for Online Courses</a> that have been adopted and used by the CLT to assess the quality of online courses. The system provides feedback using 19 guidelines grouped into six categories: Learner Support and Resources, Online Organization and Design, Instructional Design and Delivery, Assessment and Evaluation of Student Learning, Appropriate and Effective Use of Technology, and Student Feedback. The feedback provided by the system comprises the ratings that indicate the extent to which an online course meets each specific guideline as well as reviewers’ comments on each category and recommendations for revisions. </p>
+
+			<p class="lead">Instructors in the College of Languages, Linguistics & Literature (LLL) may request the CLT to review their course in the following two cases:</p>
+			<p class="lead">
+				<ol class="lead">
+					<li>Instructors need official approval of their course in order to meet the College requirement for teaching online courses, as outlined at <a href="https://goo.gl/G4tpsW" target="_blank">https://goo.gl/G4tpsW</a>.</li>
+					<li>Instructors would like to receive feedback on an online or a hybrid course that they have previously taught, are currently teaching, or are planning to teach in the near future.</li>
+				</ol>
+			</p>
+			<p class="lead"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdky9IwzssEvtGEcYFrtjOTvetlUO0Vht7bULT2eJTpLrwEmA/viewform?c=0&w=1" target="_blank">Request a Review Form</a>.</p>
 		{% else %}
-			<p class="lead">Welcome! <a href="{% url 'review' %}">Click here</a> to see online course reviews you are associated with (requires UH username and password or Guest account).</p>
+			<p class="lead">
+
+				The Online Course Review System is a web-based platform designed by the CLT. The System is based on the <a href="https://drive.google.com/file/d/0BzwfRm30Fnb6ZW82V01sUEdxSnM/view" target="_blank">Quality Guidelines for Online Courses</a> that have been adopted and used by the CLT to assess the quality of online courses. The system provides feedback using 19 guidelines grouped into six categories: Learner Support and Resources, Online Organization and Design, Instructional Design and Delivery, Assessment and Evaluation of Student Learning, Appropriate and Effective Use of Technology, and Student Feedback. The feedback provided by the system comprises the ratings that indicate the extent to which an online course meets each specific guideline as well as reviewers’ comments on each category and recommendations for revisions. </p>
+
+			<p class="lead">Instructors in the College of Languages, Linguistics & Literature (LLL) may request the CLT to review their course in the following two cases:</p>
+			<p class="lead">
+				<ol class="lead">
+					<li>Instructors need official approval of their course in order to meet the College requirement for teaching online courses, as outlined at <a href="https://goo.gl/G4tpsW" target="_blank">https://goo.gl/G4tpsW</a>.</li>
+					<li>Instructors would like to receive feedback on an online or a hybrid course that they have previously taught, are currently teaching, or are planning to teach in the near future.</li>
+				</ol>
+				<p class="lead"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdky9IwzssEvtGEcYFrtjOTvetlUO0Vht7bULT2eJTpLrwEmA/viewform?c=0&w=1" target="_blank">Request a Review Form </a></p>
+			</p>
+			
+			
 		{% endif %}
 	</div>
 </div>

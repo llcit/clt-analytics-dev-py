@@ -1,8 +1,9 @@
 {% extends "wrap.html" %}
+{% load static %}
 {% block page-level-css %}
 
-	<link rel="stylesheet" href="{{STATIC_URL}}css/review.css">
-	<link rel="stylesheet" href="{{STATIC_URL}}css/review-info.css">
+	<link rel="stylesheet" href="{% static "css/review.css" %}">
+	<link rel="stylesheet" href="{% static "css/review-info.css" %}">
 
 {% endblock %}
 {% block appname %} {% endblock %}

@@ -5,20 +5,25 @@ from django.template import RequestContext
 from django.contrib import admin
 admin.autodiscover()
 
-import analytics.views
+from analytics.views import *
 import django_cas_ng.views
 
 urlpatterns = [
     # Apps
     url(r'^review/', include('review.urls')),
-    url(r'^analytics/', analytics.views.index, name='index'),
-    url(r'^$', analytics.views.index),
+    url(r'^analytics/', index, name='index'),
+    url(r'^$', index),
+
+    # include to use the django framework login views
+    #url(r'^accounts/login/', 'django.contrib.auth.views.login', name='remote-login'),
+    # include to use the framework logout views
+     # url(r'^logout/', 'django.contrib.auth.views.logout', name='logout'),
 
     # Guest/Non-UH login form
-    url(r'^login/', analytics.views.local_login, name='login-screen'),
+    url(r'^login/', local_login, name='login-screen'),
 
     # Guest/Non-UH user login handler
-    url(r'^guest/login/', analytics.views.local_login_handler, name="local-login"),
+    url(r'^guest/login/', local_login_handler, name="local-login"),
 
     #Use the following for UH Auth
     url(r'^accounts/login/$', django_cas_ng.views.login, name='remote-login'),
