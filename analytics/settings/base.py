@@ -18,10 +18,6 @@ config = RawConfigParser()
 #Copy the server.conf.eaxmple to server.conf and add server's information
 config.read(os.path.join(BASE_DIR,'analytics/settings/server.conf'))
 
-# SSL/HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
 # Secret key stored in your local environment variable not here.
 SECRET_KEY = config.get('secrets', 'SECRET_KEY')
 
@@ -32,6 +28,15 @@ Check and configure the debug section of 'server.conf' file correctly.
 """
 DEBUG = config.get('debug', 'DEBUG')
 
+# SSL/HTTPS
+if DEBUG:
+    CSRF_COOKIE_SECURE=False
+    SECURE_SSL_REDIRECT = False
+else:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+
 ALLOWED_HOSTS = [config.get('hosts', 'HOST1'),]
 
 # ! SACRED DO NOT EDIT THESE IN DEVELOPMENT!
@@ -41,7 +46,7 @@ SITE_HOST = config.get('site', 'SITE_HOST')
 DOC_ROOT = config.get('site', 'DOC_ROOT')
 
 SITE_ID = 1
-#SECURE_SSL_REDIRECT = True
+
 
 AUTH_PROFILE_MODULE = 'review.UserProfile'
 
@@ -132,19 +137,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# Project staticfiles directory
 if DEBUG:
-    # Project base staticfiles directory
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, "analytics/static"),
         os.path.join(BASE_DIR, "review/static"),
     ]
-else:
-    # Server base staticfiles directory
-    STATIC_ROOT = '/files/web/static/analytics'
-    MEDIA_ROOT = '/files/web/media/analytics'
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+# Production staticfiles directory    
+STATIC_URL = '/static/analytics/'
+MEDIA_URL = '/media/analytics/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/analytics')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/analytics')
 
 # Login with CAS
 LOGIN_REDIRECT_URL = config.get('cas', 'LOGIN_REDIRECT_URL')

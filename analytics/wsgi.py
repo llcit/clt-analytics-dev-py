@@ -1,7 +1,6 @@
 import os, sys
 
-sys.path.append('/files/pythonapps/analytics/clt-analytics-dev-py')
-
+sys.path.append('/files/python3apps/analytics/clt-analytics-dev-py')
 
 from django.core.wsgi import get_wsgi_application
 
