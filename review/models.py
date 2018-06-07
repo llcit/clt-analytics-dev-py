@@ -32,7 +32,7 @@ class ReviewSurvey(models.Model):
     def questions(self):
         return ReviewQuestion.objects.filter(section__survey__id=self.id).order_by('section__rank', 'rank')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -49,7 +49,7 @@ class Survey(models.Model):
         # distinguished by review
         return SurveyResponse.objects.filter(question__survey__id=self.id)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -68,7 +68,7 @@ class ReviewSection(models.Model):
         comments = ReviewComment.objects.filter(section__id=self.id)
         return comments
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s" % (self.name)
 
 
@@ -91,7 +91,7 @@ class ReviewQuestion(models.Model):
     def responses(self):
         return ReviewResponse.objects.filter(question__id=self.id)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
 
@@ -107,7 +107,7 @@ class ReviewQuestionOption(models.Model):
     def getSection(self):
         return u"%s" % (self.parent.section)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s" % (self.get_rank_display())
 
 
@@ -168,7 +168,7 @@ class Review(models.Model):
         print (resp)
         return resp
 
-    def __unicode__(self):
+    def __str__(self):
         return self.coursetitle
 
 
@@ -191,7 +191,7 @@ class ReviewResponse(models.Model):
             return comment[0].text
         return ''
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % self.response
 
 #  NOTEs
@@ -204,7 +204,7 @@ class ReviewComment(models.Model):
     text = models.CharField(max_length=4096)
     postdate = models.TimeField(blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
 # This is the one who decide whether the form is completed
@@ -215,7 +215,7 @@ class ReviewReportStatus(models.Model):
     reviewer = models.ForeignKey(User)
     submitdate = models.DateTimeField(blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s %s %s' % (self.review, self.reviewer, self.submitdate)
 
 # SURVEY CLASSES ##########
@@ -229,7 +229,7 @@ class Question(models.Model):
     def getOptions(self):
         return QuestionOption.objects.filter(parent__id=self.id).order_by('rank')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
 
@@ -242,7 +242,7 @@ class QuestionOption(models.Model):
     type = models.CharField(max_length=48, choices=OPTION_CHOICES,
                             help_text=u"Allow multiple checks or only one (checbox or radio)?", default='radio')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
 
@@ -252,7 +252,7 @@ class SurveyResponse(models.Model):
     user = models.ForeignKey(User)
     response = models.CharField(max_length=4096)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.response
 
 
@@ -263,7 +263,7 @@ class UserProfile(models.Model):
     # Custom field(s) for Review application
     department = models.CharField(max_length=512, default="NOT SET")
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.user, self.department)
 
 

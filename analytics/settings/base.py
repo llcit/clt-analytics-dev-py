@@ -1,7 +1,7 @@
 """
 Django settings for analytics project.
 
-This application is the upgrade version from django 1.6.x on python2.7
+This application is the upgrade version from django 1.6.x on python 2.7
 to Django 1.11.x on Python 3.6.x
 
 For more information on this file, see 
@@ -39,14 +39,12 @@ else:
 
 ALLOWED_HOSTS = [config.get('hosts', 'HOST1'),]
 
-# ! SACRED DO NOT EDIT THESE IN DEVELOPMENT!
 SITE_ROOT = config.get('site', 'SITE_ROOT')
 SITE_NAME = config.get('site', 'SITE_NAME')
 SITE_HOST = config.get('site', 'SITE_HOST')
 DOC_ROOT = config.get('site', 'DOC_ROOT')
 
 SITE_ID = 1
-
 
 AUTH_PROFILE_MODULE = 'review.UserProfile'
 
@@ -144,8 +142,7 @@ if DEBUG:
         os.path.join(BASE_DIR, "analytics/static"),
         os.path.join(BASE_DIR, "review/static"),
     ]
-
-# Production staticfiles directory    
+   
 STATIC_URL = '/static/analytics/'
 MEDIA_URL = '/media/analytics/'
 

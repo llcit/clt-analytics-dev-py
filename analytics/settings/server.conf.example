@@ -45,7 +45,7 @@ Adam Smith: admin@localhost
 [404 mail]
 John Wayne: admin@localhost
 
-[static]
+[static_root]
 STATIC_ROOT: /files/web/static/
 MEDIA_ROOT: /files/web/smedia/
 
