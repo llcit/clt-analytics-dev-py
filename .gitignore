@@ -41,3 +41,4 @@ Thumbs.db
 *.conf
 .envrc
 .pydevproject
+.project
