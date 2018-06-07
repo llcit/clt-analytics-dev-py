@@ -149,8 +149,8 @@ if DEBUG:
 STATIC_URL = '/static/analytics/'
 MEDIA_URL = '/media/analytics/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/analytics')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/analytics')
+STATIC_ROOT = config.get('static_root', 'STATIC_ROOT')
+MEDIA_ROOT = config.get('static_root', 'MEDIA_ROOT')
 
 # Login with CAS
 LOGIN_REDIRECT_URL = config.get('cas', 'LOGIN_REDIRECT_URL')

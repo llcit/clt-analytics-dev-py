@@ -16,11 +16,9 @@ DATABASE_ENGINE: django.db.backends.mysql
 DATABASE_NAME:
 TESTSUITE_DATABASE_NAME:
 
-
 [secrets]
 SECRET_KEY
 CSRF_MIDDLEWARE_SECRET:
-
 
 [cookies]
 SESSION_COOKIE_DOMAIN:
@@ -34,11 +32,9 @@ VIEW_TEST: True
 INTERNAL_IPS: 127.0.0.1
 SKIP_CSRF_MIDDLEWARE: True
 
-
 [email]
 SERVER_EMAIL: admin@localhost
 EMAIL_HOST: localhost
-
 
 # the [error mail] and [404 mail] sections are special. Just add lines with
 #  full name: admin
@@ -46,9 +42,12 @@ EMAIL_HOST: localhost
 [error mail]
 Adam Smith: admin@localhost
 
-
 [404 mail]
 John Wayne: admin@localhost
+
+[static]
+STATIC_ROOT: /files/web/static/
+MEDIA_ROOT: /files/web/smedia/
 
 [cas]
 LOGIN_REDIRECT_URL:
